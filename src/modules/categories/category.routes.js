@@ -5,6 +5,8 @@ import categoryController from "./category.controller.js";
 
 const router = Router()
 
-router.post("/category", validationMiddleware(createCategorySchema), categoryController.createCategories)
+router.post("/category", validationMiddleware(createCategorySchema), categoryController.createCategories);
+router.get("/category", categoryController.getAllCategories);
+
 
 export default router

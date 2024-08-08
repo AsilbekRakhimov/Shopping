@@ -1,3 +1,4 @@
+import { NotFoundException } from "../../exceptions/not-found.exception.js";
 import { category } from "./category.schema.js";
 
 
@@ -8,9 +9,23 @@ class CategoryService{
     }
 
     async createCategory ({categoryName}){
-        const data = await this.#_model.create({categoryName});
-        return data
+        try {
+            const data = await this.#_model.create({categoryName});
+            return data
+        } catch (error) {
+            throw new NotFoundException(error.message)
+        }
     }
+    async getCategory (){
+        try{
+            const data = await this.#_model.find()
+            return data
+        }
+        catch(error){
+            throw new NotFoundException(error.message)
+        }
+    }
+
 }
 
 export default new CategoryService()
