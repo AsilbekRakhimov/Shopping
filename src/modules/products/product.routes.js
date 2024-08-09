@@ -7,6 +7,7 @@ import { upload } from "../../helper/product-image.helper.js";
 const router = Router()
 
 router.get("/products/:categoryID", productController.getAllProducts);
+router.get("/products/one/:id", productController.getOneProducts);
 router.post("/product", [upload.single("image"),validationMiddleware(createProductSchema)],productController.createProduct)
 
 export default router

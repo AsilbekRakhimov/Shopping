@@ -23,8 +23,11 @@ class ProductController{
                 res.status(404).send({
                     message:"Product is not found"
                 })
-                return
+                return ;
             }
+            res.status(200).send({
+                data:product
+            })
         } catch (error) {
             throw new NotFoundException(error.message)
         }
@@ -39,7 +42,8 @@ class ProductController{
         } catch (error) {
             throw new NotFoundException(error.message)
         }
-    }
+    };
+    deleteOneProduct
 }
 
 export default new ProductController()
