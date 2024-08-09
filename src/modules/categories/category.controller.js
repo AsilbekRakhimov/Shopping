@@ -9,36 +9,54 @@ class CategoryController {
   }
 
   createCategories = async (req, res) => {
-    const data = await this.#_service.createCategory(req.body);
-    if (data) {
-      res.status(201).send({
-        data:data,
-        message: "Succesfully created"
-      });
-    } else {
-      res.status(403).send({
-        message: "Errorrrr occured while creating category",
-      });
+    try {
+      const data = await this.#_service.createCategory(req.body);
+      if (data) {
+        res.status(201).send({
+          data: data,
+          message: "Succesfully created",
+        });
+      } else {
+        res.status(403).send({
+          message: "Errorrrr occured while creating category",
+        });
+      }
+    } catch (error) {
+      throw new NotFoundException(error.message);
     }
   };
   getAllCategories = async (req, res) => {
     try {
-      const data = await this.#_service.getCategory()
-      if(!data){
+      const data = await this.#_service.getCategory();
+      if (!data) {
         res.status(404).send({
-          message:"Not found"
-        })
+          message: "Not found",
+        });
         return;
       }
       res.status(200).send({
-        data:data,
-        message:"All categories"
-      })
-
+        data: data,
+        message: "All categories",
+      });
     } catch (error) {
-      throw new NotFoundException(error.message)
+      throw new NotFoundException(error.message);
     }
-  }
+  };
+  getOneCategory = async (req, res) => {
+    try {
+      const category = await this.#_service.getOneCategory(req.params.id);
+      if (!category) {
+        res.status(404).send({
+          message: "Category not found",
+        });
+        return;
+      }
+      res.status(200).send({
+        data: category,
+        message: "Category is found",
+      });
+    } catch (error) {}
+  };
 }
 
 export default new CategoryController();
