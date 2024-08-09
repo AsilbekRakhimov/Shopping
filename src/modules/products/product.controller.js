@@ -43,7 +43,22 @@ class ProductController{
             throw new NotFoundException(error.message)
         }
     };
-    deleteOneProduct
+    deleteOneProduct = async (req, res) => {
+        try {
+            const product = await this.#_service.deleteProduct(req.params.id)
+            if (product.acknowledged) {
+                res.status(200).send({
+                    message:"Product is deleted"
+                });
+                return ;
+            }
+            res.status(404).send({
+                message:"Product is not found"
+            })
+        } catch (error) {
+            throw NotFoundException(error.message)
+        }
+    }
 }
 
 export default new ProductController()

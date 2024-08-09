@@ -80,7 +80,6 @@ class CategoryController {
   deleteOneCategory = async (req, res) => {
     try {
       const deletedCategory = await this.#_service.deleteCategory(req.params.id);
-      console.log(deletedCategory);
       if(deletedCategory.acknowledged){
         res.status(200).send({
           message:"Category is deleted"

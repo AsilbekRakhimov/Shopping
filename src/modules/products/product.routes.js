@@ -9,5 +9,6 @@ const router = Router()
 router.get("/products/:categoryID", productController.getAllProducts);
 router.get("/products/one/:id", productController.getOneProducts);
 router.post("/product", [upload.single("image"),validationMiddleware(createProductSchema)],productController.createProduct)
+router.delete("/products/delete/:id", productController.deleteOneProduct);
 
 export default router
