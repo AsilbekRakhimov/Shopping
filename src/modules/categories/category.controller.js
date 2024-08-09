@@ -57,6 +57,43 @@ class CategoryController {
       });
     } catch (error) {}
   };
+  updateOneCategory = async (req, res) => {
+    try {
+      const category = await this.#_service.updateCategory(
+        req.params.id,
+        req.body
+      );
+      if (!category) {
+        res.status(404).send({
+          message: "Not found",
+        });
+        return;
+      }
+      res.status(200).send({
+        data: category,
+        message: "Category is updated",
+      });
+    } catch (error) {
+      throw new NotFoundException(error.message);
+    }
+  };
+  deleteOneCategory = async (req, res) => {
+    try {
+      const deletedCategory = await this.#_service.deleteCategory(req.params.id);
+      console.log(deletedCategory);
+      if(deletedCategory.acknowledged){
+        res.status(200).send({
+          message:"Category is deleted"
+        })
+        return;
+      }
+      res.status(404).send({
+        message:"Category is not found"
+      })
+    } catch (error) {
+      throw new NotFoundException(error.message)
+    }
+  }
 }
 
 export default new CategoryController();

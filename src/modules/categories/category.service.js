@@ -31,6 +31,25 @@ class CategoryService {
       throw new NotFoundException(error.message);
     }
   }
+  async updateCategory(categoryID, {categoryName}){
+    try {
+        const filter = {_id:categoryID}
+        const updatedCategory = await this.#_model.updateMany(filter, {$set:{
+            categoryName:categoryName
+        }})
+        return updatedCategory;
+    } catch (error) {
+        throw new NotFoundException(error.message)
+    }
+  }
+  async deleteCategory (categoryID){
+    try {
+        const deletedCategory = await this.#_model.deleteOne({_id:categoryID});
+        return deletedCategory;
+    } catch (error) {
+        throw new NotFoundException(error.message)
+    }
+  }
 }
 
 export default new CategoryService();
