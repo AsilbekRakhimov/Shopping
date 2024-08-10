@@ -1,4 +1,6 @@
+import path from "path";
 import { product } from "./product.schema.js";
+import fs from 'fs';
 
 class ProductService {
   #_model;
@@ -8,7 +10,7 @@ class ProductService {
   async getProduct(categoryId) {
     const products = await this.#_model.find({ categoryID: categoryId });
     return products;
-  }
+  };
   async getOneProduct(productID) {
     const product = await this.#_model.findById(productID);
     return product;
@@ -41,6 +43,13 @@ class ProductService {
     );
   }
   async deleteProduct (productID) {
+    const product = await this.#_model.findById(productID)
+    const productImageURL = product.image
+    fs.unlink(path.join(process.cwd(), 'uploads', productImageURL), (err) => {
+      if (err) {
+        throw err
+      }
+    })
     const deletedProduct = await this.#_model.deleteOne({_id:productID});
     return deletedProduct;
   }

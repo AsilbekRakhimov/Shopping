@@ -1,6 +1,12 @@
 export const CheckRolesGuard = (...roles) => {
     return (req, res, next) => {
-        const { accessToken } = req.headers["authorization"]
-
+        if (roles.includes(req.role)) {
+            next();
+        }
+        else{
+            res.status(405).send({
+                message:"Kirish taqiqlangan"
+            })
+        }
     }
 }

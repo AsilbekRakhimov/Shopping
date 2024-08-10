@@ -21,7 +21,7 @@ class AuthController{
     }
     signInUser = async (req, res) => {
         const data = await this.#_service.signIn(req.body)
-        if (data.length > 0) {
+        if (data.data.length > 0) {
             res.status(201).send({
                 data:data,
                 message:"User successfully signed in"

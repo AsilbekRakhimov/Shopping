@@ -36,7 +36,7 @@ class CategoryController {
       }
       res.status(200).send({
         data: data,
-        message: "All categories",
+        message: "All categories"
       });
     } catch (error) {
       throw new NotFoundException(error.message);

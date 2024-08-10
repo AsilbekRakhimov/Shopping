@@ -1,10 +1,10 @@
 import { BaseException } from "./base.exception.js";
 
-export class NotFoundException extends BaseException{
+export class AccessTokenError extends BaseException{
     constructor(message, name){
         super()
         this.message = message
-        this.name = "NotFoundException"
-        this.status = 404
+        this.status = 403
+        this.name = name
     }
 }

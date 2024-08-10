@@ -3,12 +3,40 @@ import productController from "./product.controller.js";
 import { validationMiddleware } from "../../middlewares/validation.middleware.js";
 import { createProductSchema } from "./dto/create-product.dto.js";
 import { upload } from "../../helper/product-image.helper.js";
+import { CheckAuthGuard } from "../../guard/check-auth.guard.js";
+import { CheckRolesGuard } from "../../guard/check-roles.guard.js";
 
-const router = Router()
+const router = Router();
 
-router.get("/products/:categoryID", productController.getAllProducts);
-router.get("/products/one/:id", productController.getOneProducts);
-router.post("/product", [upload.single("image"),validationMiddleware(createProductSchema)],productController.createProduct)
-router.delete("/products/delete/:id", productController.deleteOneProduct);
+router.get(
+  "/products/:categoryID",
+  CheckAuthGuard(false),
+  productController.getAllProducts
+);
 
-export default router
+router.get(
+  "/products/one/:id",
+  CheckAuthGuard(false),
+  productController.getOneProducts
+);
+
+router.post(
+  "/product",
+  [
+    CheckAuthGuard(true),
+    CheckRolesGuard("admin"),
+    upload.single("image"),
+    validationMiddleware(createProductSchema),
+  ],
+  productController.createProduct
+);
+
+router.delete(
+  "/products/delete/:id",
+  [CheckAuthGuard(true), CheckRolesGuard("admin")],
+  productController.deleteOneProduct
+);
+
+
+
+export default router;

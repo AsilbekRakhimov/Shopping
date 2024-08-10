@@ -6,7 +6,6 @@ import { signUpUserSchema } from "./dtos/create-user.dto.js";
 
 const router = Router();
 
-router.get("/users", authController.getAllusers);
 router.post("/signup",validationMiddleware(signUpUserSchema),authController.signUpUser);
 router.post("/signin",validationMiddleware(signInUserSchema),authController.signInUser);
 
