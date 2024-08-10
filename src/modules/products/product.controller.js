@@ -43,6 +43,17 @@ class ProductController{
             throw new NotFoundException(error.message)
         }
     };
+    updateOneProduct = async (req, res) => {
+        try {
+            const product = await this.#_service.createProduct(req.params.id,{...req.body, image:req.file.filename})
+            res.status(200).send({
+                data:product,
+                message:"Product is created"
+            })
+        } catch (error) {
+            throw NotFoundException(error.message)
+        }
+    }
     deleteOneProduct = async (req, res) => {
         try {
             const product = await this.#_service.deleteProduct(req.params.id)

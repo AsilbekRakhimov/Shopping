@@ -5,6 +5,7 @@ import { createProductSchema } from "./dto/create-product.dto.js";
 import { upload } from "../../helper/product-image.helper.js";
 import { CheckAuthGuard } from "../../guard/check-auth.guard.js";
 import { CheckRolesGuard } from "../../guard/check-roles.guard.js";
+import { updateProductSchema } from "./dto/update-product.dto.js";
 
 const router = Router();
 
@@ -27,6 +28,16 @@ router.post(
     CheckRolesGuard("admin"),
     upload.single("image"),
     validationMiddleware(createProductSchema),
+  ],
+  productController.createProduct
+);
+router.put(
+  "/product/:id",
+  [
+    CheckAuthGuard(true),
+    CheckRolesGuard("admin"),
+    upload.single("image"),
+    validationMiddleware(updateProductSchema),
   ],
   productController.createProduct
 );
