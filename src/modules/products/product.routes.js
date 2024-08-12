@@ -32,14 +32,14 @@ router.post(
   productController.createProduct
 );
 router.put(
-  "/product/:id",
+  "/product/update/:id",
   [
     CheckAuthGuard(true),
     CheckRolesGuard("admin"),
     upload.single("image"),
     validationMiddleware(updateProductSchema),
   ],
-  productController.createProduct
+  productController.updateOneProduct
 );
 
 router.delete(

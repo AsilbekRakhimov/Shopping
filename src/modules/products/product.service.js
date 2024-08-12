@@ -29,7 +29,13 @@ class ProductService {
     productID,
     { name, description, cost, image, categoryID }
   ) {
-    const product = await this.#_model.updateMany(
+    const product = await this.#_model.findById(productID)
+    fs.unlink(path.join(process.cwd(), 'uploads', product.image), (err) => {
+      if (err) {
+        throw err
+      }
+    })
+    const updatedProduct = await this.#_model.updateMany(
       { _id: productID },
       {
         $set: {
