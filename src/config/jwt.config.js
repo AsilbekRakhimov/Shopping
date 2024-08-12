@@ -1,6 +1,10 @@
 import dotenv from 'dotenv';
 
 dotenv.config();
+const jwtObject = {
+    jwtKey:process.env.jwt_key,
+    jwtKeyExpire : process.env.jwt_key_expire
+}
 
 export const jwtKey = process.env.jwt_key
 

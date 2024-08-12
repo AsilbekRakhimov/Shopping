@@ -1,11 +1,23 @@
-import mongoose,{ Schema } from "mongoose";
+import mongoose, { Schema, SchemaTypes } from "mongoose";
 
-const categorySchema = new Schema({
-    categoryName: String
-}, {
-    _id:true,
-    timestamps:true,
-    collection:"categories"
-})
+const categorySchema = new Schema(
+  {
+    categoryName: {
+      type: String,
+      required: true,
+    },
+    products: [
+      {
+        type: SchemaTypes.ObjectId,
+        ref: "products",
+      },
+    ],
+  },
+  {
+    _id: true,
+    timestamps: true,
+    collection: "categories",
+  }
+);
 
-export const category = mongoose.model('categories', categorySchema)
+export const category = mongoose.model("categories", categorySchema);

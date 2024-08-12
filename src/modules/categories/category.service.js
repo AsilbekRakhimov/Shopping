@@ -17,7 +17,7 @@ class CategoryService {
   }
   async getCategory() {
     try {
-      const data = await this.#_model.find();
+      const data = await this.#_model.find().populate("products");
       return data;
     } catch (error) {
       throw new NotFoundException(error.message);

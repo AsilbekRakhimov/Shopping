@@ -23,6 +23,8 @@ class AuthService {
     const refreshToken = signRefreshToken({ id: data[0]["_id"], role: data[0].role });
     return {data, refreshToken, token};
   }
+
+  
 }
 
 export default new AuthService();

@@ -72,7 +72,7 @@ class ProductController {
         message: "Product is not found",
       });
     } catch (error) {
-      throw NotFoundException(error.message);
+      throw new NotFoundException(error.message);
     }
   };
 }
