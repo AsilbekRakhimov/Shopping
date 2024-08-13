@@ -7,16 +7,17 @@ import {
   jwtRefreshKeyExpire,
 } from "../config/jwt.config.js";
 import { AccessTokenError } from "../exceptions/access-token.exception.js";
+import jwtObject from "../config/jwt.config.js";
 
 export const signToken = (data) => {
-    return jwt.sign(data, jwtKey,{
-        expiresIn:jwtKeyExpire
+    return jwt.sign(data, jwtObject.jwtKey ,{
+        expiresIn:jwtObject.jwtKeyExpire
     })
 }
 
 export const signRefreshToken = (data) => {
-    return jwt.sign(data, jwtRefreshKey, {
-        expiresIn:jwtRefreshKeyExpire
+    return jwt.sign(data, jwtObject.jwtRefreshKey, {
+        expiresIn:jwtObject.jwtRefreshKeyExpire
     })
 }
 
@@ -26,8 +27,7 @@ export const verifyToken = (token, secretKey) => {
     jwt.verify(token, secretKey , (err, decoded) => {
         if (decoded) {
             response = decoded
-        }
-
+        }e
         if (err instanceof jwt.TokenExpiredError) {
             throw new AccessTokenError("Token is expired");
         }

@@ -23,13 +23,6 @@ class ProductService {
     return product;
   }
   async createProduct({ name, description, cost, image, categoryID }) {
-    // const product = await this.#_model.insertMany({
-    //   name,
-    //   description,
-    //   cost,
-    //   image,
-    //   category: categoryID,
-    // });
 
     const product = await this.#_model.create({
       name,
@@ -39,10 +32,8 @@ class ProductService {
       category: categoryID,
     })
 
-    const error = product.validateSync()
-
+  
     if(error) {
-      console.log(error.message, "okkkkkk")
       throw new Error(error.message)
     }
 
