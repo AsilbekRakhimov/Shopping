@@ -1,4 +1,6 @@
 import { productImages } from "./product-image.schema.js"
+import fs from 'fs';
+import path from "path";
 
 class ProductImagesService{
     #_model
@@ -30,6 +32,17 @@ class ProductImagesService{
     async getAllImages(){
         const images = await this.#_model.find()
         return images
+    }
+
+    async deleteOneImage(imageId){
+        const imageData = await this.#_model.findById({_id:imageId})
+        fs.unlink(path.join(process.cwd(), 'uploads', imageData.image), (err) => {
+            if (err) {
+              throw err
+            }
+          })
+        const data = await this.#_model.deleteOne({_id:imageId})
+        return data
     }
 }
 

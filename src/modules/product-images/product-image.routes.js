@@ -10,5 +10,6 @@ const router = Router();
 router.post("/product-image",[upload.array("images"),validationMiddleware(createImageSchema)], productImageController.createImage);
 router.get("/product-image/:id",productImageController.getImage);
 router.get("/product-image",productImageController.getImages);
+router.delete("/product-image/:id", productImageController.deleteImage);
 
 export default router

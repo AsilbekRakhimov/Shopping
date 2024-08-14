@@ -71,6 +71,26 @@ class ProductImageController{
             });
         }
     }
+
+    deleteImage = async (req, res) => {
+        try {
+           const data = await this.#_service.deleteOneImage(req.params.id);
+           if (data.acknowledged && data.deletedCount > 0) {
+                res.status(200).send({
+                    message:"Image is deleted"
+                })
+           }
+           else{
+            res.status(404).send({
+                message:"Image is not found"
+            })
+           }
+        } catch (error) {
+            res.status(400).send({
+                message:"There is error while delete image"
+            })
+        }
+    }
 }
 
 export default new ProductImageController()
