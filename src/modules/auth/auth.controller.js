@@ -33,6 +33,12 @@ class AuthController{
             })
         }
     }
+    signRefreshToken = async (req,res) => {
+        const data = await this.#_service.signOneRefreshToken(req.body);
+        res.status(200).send({
+            data:data,
+        });
+    }
 }
 
 export default new AuthController()

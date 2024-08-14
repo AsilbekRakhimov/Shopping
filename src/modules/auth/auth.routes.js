@@ -8,5 +8,6 @@ const router = Router();
 
 router.post("/signup",validationMiddleware(signUpUserSchema),authController.signUpUser);
 router.post("/signin",validationMiddleware(signInUserSchema),authController.signInUser);
+router.post("/sign-access-token-again",authController.signRefreshToken)
 
 export default router

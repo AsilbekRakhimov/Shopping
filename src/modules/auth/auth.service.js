@@ -1,5 +1,6 @@
 import { User } from "./auth.schema.js";
-import { signToken, signRefreshToken } from "../../helper/jwt.helper.js";
+import { signToken, signRefreshToken, verifyToken } from "../../helper/jwt.helper.js";
+import jwtObject from "../../config/jwt.config.js";
 
 class AuthService {
   #_model;
@@ -22,6 +23,12 @@ class AuthService {
     const token = signToken({ id: data[0]["_id"], role: data[0].role });
     const refreshToken = signRefreshToken({ id: data[0]["_id"], role: data[0].role });
     return {data, refreshToken, token};
+  }
+
+  async signOneRefreshToken({refreshToken}){
+    const response = verifyToken(refreshToken,jwtObject.jwtRefreshKey);
+    const newAccessToken = signToken({id:response.id, role: response.role})
+    return newAccessToken;
   }
 
   

@@ -7,11 +7,11 @@ import router from './routes/index.routes.js';
 const app = express()
 app.use(express.json())
 
-app.use("/api/v1", router);
+app.use("/", router);
 
 await mongo()
-
 app.use(ErrorHandlerMIddleware)
+
 
 app.listen(appConfig.port, appConfig.host, ()=>{
     console.log(`Server is running on port: ${appConfig.port}`);

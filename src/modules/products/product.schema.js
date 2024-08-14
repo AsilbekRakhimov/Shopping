@@ -4,15 +4,13 @@ const productSchema = new Schema({
   name: {
     type: String,
     required: [true, "Name berib yuborish shart"],
-    minLength: [5, "Minimall 5 length bo'lsin ukom"]
   },
-  decsription: {
+  description: {
     type: String,
   },
   cost: {
     type: String,
   },
-  image: String,
   category: {
     type: SchemaTypes.ObjectId,
     ref: "categories",

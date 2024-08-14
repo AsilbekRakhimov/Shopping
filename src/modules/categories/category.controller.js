@@ -55,7 +55,11 @@ class CategoryController {
         data: category,
         message: "Category is found",
       });
-    } catch (error) {}
+    } catch (error) {
+      res.status(404).send({
+        message:"Category is not found!"
+      })
+    }
   };
   updateOneCategory = async (req, res) => {
     try {

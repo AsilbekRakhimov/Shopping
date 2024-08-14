@@ -27,7 +27,7 @@ export const verifyToken = (token, secretKey) => {
     jwt.verify(token, secretKey , (err, decoded) => {
         if (decoded) {
             response = decoded
-        }e
+        }
         if (err instanceof jwt.TokenExpiredError) {
             throw new AccessTokenError("Token is expired");
         }
@@ -41,3 +41,5 @@ export const verifyToken = (token, secretKey) => {
     })
     return response
 }
+
+

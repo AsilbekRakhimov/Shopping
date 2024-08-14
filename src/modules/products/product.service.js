@@ -22,29 +22,19 @@ class ProductService {
     const product = await this.#_model.findById(productID);
     return product;
   }
-  async createProduct({ name, description, cost, image, categoryID }) {
-
-    const product = await this.#_model.create({
+  async createOneProduct({ name, description, cost, image, categoryID }) {
+    const product = await this.#_model.insertMany({
       name,
       description,
       cost,
-      image,
       category: categoryID,
     })
-
-  
-    if(error) {
-      throw new Error(error.message)
-    }
-
-    await product.save()
 
     await this.#_categoryModel.updateOne({_id: categoryID}, {
       $push: {
         products: product[0]._id
       }
     })
-
     return product;
   }
 
@@ -53,12 +43,12 @@ class ProductService {
     productID,
     { name, description, cost, image, categoryID }
   ) {
-    const product = await this.#_model.findById(productID)
-    fs.unlink(path.join(process.cwd(), 'uploads', product.image), (err) => {
-      if (err) {
-        throw err
-      }
-    })
+    // const product = await this.#_model.findById(productID)
+    // fs.unlink(path.join(process.cwd(), 'uploads', product.image), (err) => {
+    //   if (err) {
+    //     throw err
+    //   }
+    // })
     const updatedProduct = await this.#_model.updateMany(
       { _id: productID },
       {
@@ -66,14 +56,12 @@ class ProductService {
           name,
           description,
           cost,
-          image,
           categoryID,
         },
       }
     );
+    return updatedProduct
   }
-
-
   async deleteProduct (productID) {
     const product = await this.#_model.findById(productID)
     const productImageURL = product.image

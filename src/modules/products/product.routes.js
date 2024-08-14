@@ -26,7 +26,7 @@ router.post(
   [
     CheckAuthGuard(true),
     CheckRolesGuard("admin"),
-    upload.single("image"),
+    upload.array("image"),
     validationMiddleware(createProductSchema),
   ],
   productController.createProduct

@@ -27,21 +27,25 @@ class ProductController {
       }
       res.status(200).send({
         data: product,
-      });
+      })
     } catch (error) {
-      throw new NotFoundException(error.message);
+      res.status(404).send({
+        message:"Data is not found"
+      })
+      // throw new NotFoundException(error.message);
     }
   };
   createProduct = async (req, res) => {
     try {
-      const product = await this.#_service.createProduct({
-        ...req.body,
-        image: req.file.filename,
-      });
+      const {cost, description, name, categoryID} = req.body
+      const created = await this.#_service.createOneProduct({
+        cost, description, name, categoryID
+      })
       res.status(201).send({
-        data: product,
+        data: created,
         message: "Product is created",
-      });
+      })
+
     } catch (error) {
       throw new NotFoundException(error.message);
     }
@@ -56,7 +60,7 @@ class ProductController {
         message: "Product is updated",
       });
     } catch (error) {
-      throw NotFoundException(error.message);
+      throw new NotFoundException(error.message);
     }
   };
   deleteOneProduct = async (req, res) => {

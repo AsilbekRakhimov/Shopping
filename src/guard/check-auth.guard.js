@@ -22,9 +22,8 @@ export const CheckAuthGuard = (isAuth) => {
 
     const accessToken = bearerToken.split("Bearer ")[1];
     const response = verifyToken(accessToken, jwtKey);
-    req.userId = response.id
-    req.role = response.role
-
+    req.userId = response.id;
+    req.role = response.role;
     next();
   };
 };
