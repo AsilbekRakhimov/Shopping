@@ -6,10 +6,9 @@ export const ErrorHandlerMIddleware = (err, req, res, next) =>{
         })
         return ;
     }
-    // next();
 
-    // res.status(500).json({
-    //     message:"Server bilan bog'liq xatolik"
-    // })
+    res.status(500).json({
+        message:"Server bilan bog'liq xatolik"
+    })
 
 }

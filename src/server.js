@@ -12,6 +12,12 @@ app.use("/", router);
 await mongo()
 app.use(ErrorHandlerMIddleware)
 
+app.all("*", (req, res) => {
+    res.status(404).send({
+        message:"Url is not found"
+    })
+})
+
 
 app.listen(appConfig.port, appConfig.host, ()=>{
     console.log(`Server is running on port: ${appConfig.port}`);

@@ -15,11 +15,13 @@ router.get(
   productController.getAllProducts
 );
 
+
 router.get(
   "/products/one/:id",
   CheckAuthGuard(false),
   productController.getOneProducts
 );
+
 
 router.post(
   "/product",
@@ -31,6 +33,8 @@ router.post(
   ],
   productController.createProduct
 );
+
+
 router.put(
   "/product/update/:id",
   [
@@ -42,12 +46,12 @@ router.put(
   productController.updateOneProduct
 );
 
+
 router.delete(
   "/products/delete/:id",
   [CheckAuthGuard(true), CheckRolesGuard("admin")],
   productController.deleteOneProduct
 );
-
 
 
 export default router;

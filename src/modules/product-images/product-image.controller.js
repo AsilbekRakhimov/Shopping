@@ -1,11 +1,12 @@
 import productImageService from "./product-image.service.js"
 
 class ProductImageController{
-    #_service
+    #_service;
     constructor(){
         this.#_service = productImageService
     }
 
+    // create images
     createImage = async (req, res) => {
         try {
             const imageObj = []
@@ -33,7 +34,10 @@ class ProductImageController{
             })
         }
     }
+    // create images
 
+
+    // get one image
     getImage = async (req, res) => {
         try {
             const image = await this.#_service.getOneImage(req.params.id)
@@ -52,7 +56,10 @@ class ProductImageController{
             })
         }
     }
+    // get one image
 
+
+    // get all images
     getImages = async (req, res) => {
         try {
             const allImages = await this.#_service.getAllImages()
@@ -71,7 +78,10 @@ class ProductImageController{
             });
         }
     }
+    // get all images
 
+
+    // delete one image
     deleteImage = async (req, res) => {
         try {
            const data = await this.#_service.deleteOneImage(req.params.id);
@@ -91,6 +101,8 @@ class ProductImageController{
             })
         }
     }
+    // delete one image
+
 }
 
 export default new ProductImageController()

@@ -7,6 +7,8 @@ class ProductImagesService{
     constructor(){
         this.#_model = productImages
     }
+
+    
     async createImages (images) {
         try {
             if (!images[0].imageUrl) {
@@ -24,15 +26,18 @@ class ProductImagesService{
         } 
     }
 
+
     async getOneImage(imageId){
         const image = await this.#_model.findById(imageId);
         return image;
     }
 
+
     async getAllImages(){
         const images = await this.#_model.find()
         return images
     }
+
 
     async deleteOneImage(imageId){
         const imageData = await this.#_model.findById({_id:imageId})

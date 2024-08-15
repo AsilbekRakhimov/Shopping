@@ -1,3 +1,4 @@
+import { isValidObjectId } from "mongoose";
 import { NotFoundException } from "../../exceptions/not-found.exception.js";
 import categoryService from "./category.service.js";
 
@@ -8,6 +9,7 @@ class CategoryController {
     this.#_service = categoryService;
   }
 
+  // create category
   createCategories = async (req, res) => {
     try {
       const data = await this.#_service.createCategory(req.body);
@@ -25,6 +27,10 @@ class CategoryController {
       throw new NotFoundException(error.message);
     }
   };
+  // create category
+
+
+  //  get all categories
   getAllCategories = async (req, res) => {
     try {
       const data = await this.#_service.getCategory();
@@ -42,6 +48,10 @@ class CategoryController {
       throw new NotFoundException(error.message);
     }
   };
+  //  get all categories
+
+
+  //  get one category
   getOneCategory = async (req, res) => {
     try {
       const category = await this.#_service.getOneCategory(req.params.id);
@@ -56,11 +66,15 @@ class CategoryController {
         message: "Category is found",
       });
     } catch (error) {
-      res.status(404).send({
+      res.status(500).send({
         message:"Category is not found!"
       })
     }
   };
+  //  get one category
+
+
+  // update category
   updateOneCategory = async (req, res) => {
     try {
       const category = await this.#_service.updateCategory(
@@ -78,9 +92,15 @@ class CategoryController {
         message: "Category is updated",
       });
     } catch (error) {
-      throw new NotFoundException(error.message);
+      res.status(404).send({
+        message:"Not found category for update"
+      })
     }
   };
+  // update category
+
+  
+  //  delete category
   deleteOneCategory = async (req, res) => {
     try {
       const deletedCategory = await this.#_service.deleteCategory(req.params.id);
@@ -97,6 +117,8 @@ class CategoryController {
       throw new NotFoundException(error.message)
     }
   }
+  //  delete category
+
 }
 
 export default new CategoryController();

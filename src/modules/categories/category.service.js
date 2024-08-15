@@ -15,6 +15,8 @@ class CategoryService {
       throw new NotFoundException(error.message);
     }
   }
+
+
   async getCategory() {
     try {
       const data = await this.#_model.find().populate("products");
@@ -23,6 +25,8 @@ class CategoryService {
       throw new NotFoundException(error.message);
     }
   }
+
+
   async getOneCategory(categoryID) {
     try {
       const category = await this.#_model.findById(categoryID);
@@ -31,6 +35,8 @@ class CategoryService {
       throw new NotFoundException(error.message);
     }
   }
+
+
   async updateCategory(categoryID, {categoryName}){
     try {
         const filter = {_id:categoryID}
@@ -42,6 +48,8 @@ class CategoryService {
         throw new NotFoundException(error.message)
     }
   }
+
+
   async deleteCategory (categoryID){
     try {
         const deletedCategory = await this.#_model.deleteOne({_id:categoryID});
@@ -50,6 +58,8 @@ class CategoryService {
         throw new NotFoundException(error.message)
     }
   }
+
+  
 }
 
 export default new CategoryService();

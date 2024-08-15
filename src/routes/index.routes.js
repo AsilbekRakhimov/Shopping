@@ -6,17 +6,9 @@ import productImageRouter from "../modules/product-images/product-image.routes.j
 
 const router = Router();
 
-try {
-  router.use("/api/v1", authRouter);
-  router.use("/api/v1", categoryRouter);
-  router.use("/api/v1", productRouter);
-  router.use("/api/v1", productImageRouter);
-} catch (error) {
-  router.use("/", function elses(req, res) {
-    res.status(404).send({
-      message: "Url is not found",
-    });
-  });
-}
+router.use("/api/v1", authRouter);
+router.use("/api/v1", categoryRouter);
+router.use("/api/v1", productRouter);
+router.use("/api/v1", productImageRouter);
 
 export default router;

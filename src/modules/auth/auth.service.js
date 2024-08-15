@@ -7,6 +7,8 @@ class AuthService {
   constructor() {
     this.#_model = User;
   }
+
+  
   async signUp({ name, username, password,role }) {
     const data = await this.#_model.create({
       name,
@@ -18,6 +20,8 @@ class AuthService {
     const refreshToken = signRefreshToken({ id: data["_id"], role: data.role });
     return { data, token, refreshToken };
   }
+
+
   async signIn({ username, password }) {
     const data = await this.#_model.find({ username, password});
     const token = signToken({ id: data[0]["_id"], role: data[0].role });
@@ -25,13 +29,13 @@ class AuthService {
     return {data, refreshToken, token};
   }
 
+
   async signOneRefreshToken({refreshToken}){
     const response = verifyToken(refreshToken,jwtObject.jwtRefreshKey);
     const newAccessToken = signToken({id:response.id, role: response.role})
-    return newAccessToken;
+    const newRefreshToken = signRefreshToken({id:response.id, role:response.role});
+    return {newAccessToken, newRefreshToken};
   }
-
-  
 }
 
 export default new AuthService();

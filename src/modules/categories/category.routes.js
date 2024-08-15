@@ -17,16 +17,22 @@ router.post(
   ],
   categoryController.createCategories
 );
+
+
 router.get(
   "/category",
   CheckAuthGuard(false),
   categoryController.getAllCategories
 );
+
+
 router.get(
   "/category/:id",
   CheckAuthGuard(false),
   categoryController.getOneCategory
 );
+
+
 router.put(
   "/category/:id",
   [
@@ -37,6 +43,8 @@ router.put(
   validationMiddleware(updateCategorySchema),
   categoryController.updateOneCategory
 );
+
+
 router.delete(
   "/category/:id",
   [CheckAuthGuard(true), CheckRolesGuard("admin")],
