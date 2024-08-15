@@ -2,7 +2,7 @@ import { Router } from "express";
 import authController from "./auth.controller.js";
 import { validationMiddleware } from "../../middlewares/validation.middleware.js";
 import { signInUserSchema } from "./dtos/signin-user.dto.js";
-import { signUpUserSchema } from "./dtos/create-user.dto.js";
+import { signUpUserSchema } from "./dtos/sign-up.dto.js";
 
 const router = Router();
 

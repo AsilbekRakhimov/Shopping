@@ -1,11 +1,4 @@
 import jwt from "jsonwebtoken";
-
-import {
-  jwtKey,
-  jwtKeyExpire,
-  jwtRefreshKey,
-  jwtRefreshKeyExpire,
-} from "../config/jwt.config.js";
 import { AccessTokenError } from "../exceptions/access-token.exception.js";
 import jwtObject from "../config/jwt.config.js";
 

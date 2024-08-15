@@ -10,21 +10,21 @@ import { updateProductSchema } from "./dto/update-product.dto.js";
 const router = Router();
 
 router.get(
-  "/products/:categoryID",
+  "/:categoryID",
   CheckAuthGuard(false),
   productController.getAllProducts
 );
 
 
 router.get(
-  "/products/one/:id",
+  "/one/:id",
   CheckAuthGuard(false),
   productController.getOneProducts
 );
 
 
 router.post(
-  "/product",
+  "/",
   [
     CheckAuthGuard(true),
     CheckRolesGuard("admin"),
@@ -36,7 +36,7 @@ router.post(
 
 
 router.put(
-  "/product/update/:id",
+  "/update/:id",
   [
     CheckAuthGuard(true),
     CheckRolesGuard("admin"),
@@ -48,7 +48,7 @@ router.put(
 
 
 router.delete(
-  "/products/delete/:id",
+  "/delete/:id",
   [CheckAuthGuard(true), CheckRolesGuard("admin")],
   productController.deleteOneProduct
 );

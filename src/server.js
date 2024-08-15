@@ -7,9 +7,10 @@ import router from './routes/index.routes.js';
 const app = express()
 app.use(express.json())
 
-app.use("/", router);
-
 await mongo()
+
+app.use("/api/v1", router);
+
 app.use(ErrorHandlerMIddleware)
 
 app.all("*", (req, res) => {
@@ -17,7 +18,6 @@ app.all("*", (req, res) => {
         message:"Url is not found"
     })
 })
-
 
 app.listen(appConfig.port, appConfig.host, ()=>{
     console.log(`Server is running on port: ${appConfig.port}`);

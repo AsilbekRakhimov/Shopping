@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
-import { dbconfig } from "../config/mongo.config.js";
+import dbconfig from "../config/mongo.config.js";
+
 
 export async function mongo() {
-  await mongoose.connect(dbconfig);
+  await mongoose.connect(dbconfig.database_url);
 }

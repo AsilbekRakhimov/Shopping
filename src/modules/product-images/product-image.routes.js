@@ -8,13 +8,25 @@ import { CheckRolesGuard } from "../../guard/check-roles.guard.js";
 
 const router = Router();
 
+router.post(
+  "/",
+  [
+    upload.array("images"),
+    CheckAuthGuard(true),
+    CheckRolesGuard("admin"),
+    validationMiddleware(createImageSchema),
+  ],
+  productImageController.createImage
+);
 
-router.post("/product-image",[upload.array("images"),CheckAuthGuard(true), CheckRolesGuard("admin"),validationMiddleware(createImageSchema)], productImageController.createImage);
+router.get("/:id", productImageController.getImage);
 
-router.get("/product-image/:id",productImageController.getImage);
+router.get("/", productImageController.getImages);
 
-router.get("/product-image",productImageController.getImages);
+router.delete(
+  "/:id",
+  [CheckAuthGuard(true), CheckRolesGuard("admin")],
+  productImageController.deleteImage
+);
 
-router.delete("/product-image/:id", [CheckAuthGuard(true), CheckRolesGuard("admin")],productImageController.deleteImage);
-
-export default router
+export default router;

@@ -9,7 +9,7 @@ import { CheckRolesGuard } from "../../guard/check-roles.guard.js";
 const router = Router();
 
 router.post(
-  "/category",
+  "/",
   [
     CheckAuthGuard(true),
     CheckRolesGuard("admin"),
@@ -20,21 +20,21 @@ router.post(
 
 
 router.get(
-  "/category",
+  "/",
   CheckAuthGuard(false),
   categoryController.getAllCategories
 );
 
 
 router.get(
-  "/category/:id",
+  "/:id",
   CheckAuthGuard(false),
   categoryController.getOneCategory
 );
 
 
 router.put(
-  "/category/:id",
+  "/:id",
   [
     CheckAuthGuard(true),
     CheckRolesGuard("admin"),
@@ -46,7 +46,7 @@ router.put(
 
 
 router.delete(
-  "/category/:id",
+  "/:id",
   [CheckAuthGuard(true), CheckRolesGuard("admin")],
   categoryController.deleteOneCategory
 );

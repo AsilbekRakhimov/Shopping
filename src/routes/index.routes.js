@@ -6,9 +6,9 @@ import productImageRouter from "../modules/product-images/product-image.routes.j
 
 const router = Router();
 
-router.use("/api/v1", authRouter);
-router.use("/api/v1", categoryRouter);
-router.use("/api/v1", productRouter);
-router.use("/api/v1", productImageRouter);
+router.use("/auth", authRouter);
+router.use("/category", categoryRouter);
+router.use("/product", productRouter);
+router.use("/product-image", productImageRouter);
 
 export default router;

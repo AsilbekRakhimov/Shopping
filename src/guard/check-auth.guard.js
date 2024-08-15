@@ -1,9 +1,9 @@
-import { jwtKey } from "../config/jwt.config.js";
+import jwtConfig from "../config/jwt.config.js";
 import { NotFoundException } from "../exceptions/not-found.exception.js";
 import { verifyToken } from "../helper/jwt.helper.js";
 
 export const CheckAuthGuard = (isAuth) => {
-  return (req, res, next) => {
+  return (req, _, next) => {
     if (!isAuth) {
       req.role = "user";
       next();
@@ -21,7 +21,7 @@ export const CheckAuthGuard = (isAuth) => {
     }
 
     const accessToken = bearerToken.split("Bearer ")[1];
-    const response = verifyToken(accessToken, jwtKey);
+    const response = verifyToken(accessToken, jwtConfig.jwtKey);
     req.userId = response.id;
     req.role = response.role;
     next();

@@ -5,6 +5,6 @@ export class ValidationError extends BaseException{
         super()
         this.message = message
         this.name = "Validation Error"
-        this.status = 401
+        this.status = 409
     }
 }
